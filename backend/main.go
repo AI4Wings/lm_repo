@@ -150,7 +150,14 @@ func handleImageUpload(ctx context.Context, c *app.RequestContext) {
 		"original_size": fileHeader.Size,
 		"compressed_size": len(compressed),
 		"filename": filename,
-		"url": fmt.Sprintf("http://localhost:8888/uploads/%s", filename),
+		"url": func() string {
+			publicURL := os.Getenv("PUBLIC_URL")
+			fmt.Printf("Debug: PUBLIC_URL=%s\n", publicURL)
+			if publicURL == "" {
+				publicURL = "http://localhost:8888"
+			}
+			return fmt.Sprintf("%s/uploads/%s", strings.TrimRight(publicURL, "/"), filename)
+		}(),
 	})
 }
 

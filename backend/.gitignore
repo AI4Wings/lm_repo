@@ -1,0 +1,6 @@
+image-service
+pid.txt
+server.log
+*.jpg
+*.png
+uploads/

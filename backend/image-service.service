@@ -1,0 +1,17 @@
+[Unit]
+Description=Image Upload and Compression Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/lm_repo/backend/image-service
+Environment="PUBLIC_URL=https://chat-ai-app-backend-tpsufkpj.devinapps.com"
+WorkingDirectory=/home/ubuntu/lm_repo/backend
+StandardOutput=append:/var/log/image-service/service.log
+StandardError=append:/var/log/image-service/error.log
+User=ubuntu
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
